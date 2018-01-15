@@ -1,9 +1,29 @@
 version: '2'
 
 services:
-    app:
-        build: .
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        container_name: nginx-proxy
+        ports:
+            - "80:80"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+    php:
+        build:
+            context: .
+            dockerfile: ./resources/docker/php/Dockerfile
         volumes:
             - ./:/var/www/html
         ports:
             - 8081:80
+        environment:
+            - VIRTUAL_HOST=php.localhost
+    mwl:
+        build:
+            context: ./resources/docker/mwl/
+        volumes:
+            - ./:/var/www/html
+        ports:
+            - 8082:80
+        environment:
+            - VIRTUAL_HOST=mwl.localhost
