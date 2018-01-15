@@ -13,7 +13,7 @@ services:
             context: .
             dockerfile: ./resources/docker/php/Dockerfile
         volumes:
-            - ./:/var/www/html
+            - ./:/var/www/html:cached
         ports:
             - 8081:80
         environment:
@@ -22,7 +22,7 @@ services:
         build:
             context: ./resources/docker/mwl/
         volumes:
-            - ./:/var/www/html
+            - ./:/var/www/html:cached
         ports:
             - 8082:80
         environment:
