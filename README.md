@@ -11,6 +11,9 @@ cp .env.example .env
 php artisan key:generate
 
 docker-compose up -d
+
+sudo chown -R $(id -u):www-data ./
+sudo chmod -R ug+rw .
 ```
 
 To run the tests, you need the [Apache Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html) tool installed, run:
